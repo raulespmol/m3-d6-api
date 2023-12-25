@@ -54,3 +54,13 @@ body main #convert-btn:hover {
   background-color: #1594a7;
   cursor: pointer;
 }
+body main #result {
+  font-size: 2.3rem;
+  font-family: "Roboto Mono", monospace;
+}
+body #error {
+  color: #ff403d;
+  text-align: center;
+  margin-top: 1rem;
+  line-height: 10px;
+}
