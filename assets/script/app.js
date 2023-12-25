@@ -12,22 +12,25 @@ async function getCurrencies(URL){
     const { uf, dolar, euro, utm } = data
     return[ uf, dolar, euro, utm ];
   } catch (error) {
-    spanResult.innerText = //cambiar a return?
-    `Lo sentimos! Ha ocurrido un error (${error})`
+    spanResult.innerText =
+    `Lo sentimos! Ha ocurrido un error (${error.message})`
   }
 }
 
 async function renderOptions(URL){
-  const currencies = await getCurrencies(URL)
-
-  currencies.forEach(c => {
-    const option = document.createElement('option')
-    option.value = c.codigo
-    option.innerText = c.nombre
-
-    select.appendChild(option)
-  })
-  console.log(currencies);
+  try {
+    const currencies = await getCurrencies(URL)
+    currencies.forEach(c => {
+      const option = document.createElement('option')
+      option.value = c.codigo
+      option.innerText = c.nombre
+  
+      select.appendChild(option)
+    })
+  } catch (error) {
+    spanResult.innerText =
+    `Lo sentimos! Ha ocurrido un error (${error.message})`
+  }
 }
 
 renderOptions(API)
