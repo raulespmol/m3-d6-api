@@ -17,8 +17,17 @@ async function getCurrencies(URL){
   }
 }
 
-async function renderOptions(){
-  
+async function renderOptions(URL){
+  const currencies = await getCurrencies(URL)
+
+  currencies.forEach(c => {
+    const option = document.createElement('option')
+    option.value = c.codigo
+    option.innerText = c.nombre
+
+    select.appendChild(option)
+  })
+  console.log(currencies);
 }
 
-getCurrencies(API)
+renderOptions(API)
