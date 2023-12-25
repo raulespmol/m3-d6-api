@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Ubuntu&display=swap');
 
+//Generales
 $fs: 1.2rem;
 
 * {
@@ -8,6 +9,21 @@ $fs: 1.2rem;
   box-sizing: border-box;
   font-family: 'Ubuntu', sans-serif;
 }
+
+/* Chrome, Safari, Edge, Opera */ //Ocultar botones del input
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+//Estilos
 
 body {
   background-color: #26292c;
@@ -24,7 +40,7 @@ body {
   
   main {
     width: 350px;
-    min-height: 450px;
+    min-height: 280px;
     background-color: #1c1d21;
     border-radius: 1em;
     padding: 1rem;
@@ -33,7 +49,12 @@ body {
     align-items: center;
     gap: 10px;
 
-    h2, p, span {
+    h2 {
+      color: #729d2d;
+      text-align: center;
+    }
+
+    p, span {
       color: #FFF;
       text-align: center;
     }
@@ -52,12 +73,12 @@ body {
     #convert-btn{
       padding: 10px;
       border-radius: 5px;
-      background-color: #0aadc6;
+      background-color: #729d2d;
       color: #FFF;
       border: none;
       font-size: $fs;
       &:hover{
-        background-color: #1594a7;
+        background-color: #5c861a;
         cursor: pointer;
       }
     }
