@@ -69,6 +69,7 @@ async function convertCurrency(){ //Obtener CLP desde input y valor de moneda se
     if(valueCLP > 0){
       const conversion = (valueCLP / currencyValue).toFixed(2)
       spanResult.innerText = `${selectedCurrency.codigo === 'euro' ? '€' : '$'}${conversion}`
+      renderChart()
     } else {
       alert('Debes ingresar un monto mayor a cero')
     }
@@ -79,13 +80,13 @@ async function chartConfig() {
   // Creamos las variables necesarias para el objeto de configuración
   const selectedCurrency = await fetchSelected()
   
-  const dates = selectedCurrency.serie.map(c => c.fecha)
+  const dates = await selectedCurrency.serie.map(c => c.fecha)
   const formatDate = dates.map(d => d.slice(0, 10))
   
   const chartType = "line";
   const title = "Valor histórico";
-  const lineColor = "red";
-  const values = selectedCurrency.serie.map(c => parseInt(c.valor))
+  const lineColor = "#729d2d";
+  const values = await selectedCurrency.serie.map(c => parseInt(c.valor))
 
   //Creamos el objeto de configuración usando las variables anteriores
   const config = {
@@ -106,7 +107,6 @@ async function chartConfig() {
 
 async function renderChart() {
   const config = await chartConfig();
-  console.log(config);
   const chartDOM = document.getElementById("myChart");
   if(myChart){
     myChart.destroy()
