@@ -25,14 +25,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   min-height: 100vh;
 }
-body h1 {
+body main h1 {
   color: #FFF;
   margin-bottom: 1rem;
+  text-align: center;
 }
-body main {
+body main .box {
   width: 350px;
   min-height: 280px;
   background-color: #1c1d21;
@@ -43,24 +43,24 @@ body main {
   align-items: center;
   gap: 10px;
 }
-body main h2 {
+body main .box h2 {
   color: #729d2d;
   text-align: center;
 }
-body main p, body main span {
+body main .box p, body main .box span {
   color: #FFF;
   text-align: center;
 }
-body main #clp-input {
+body main .box #clp-input {
   width: 100px;
   text-align: center;
   font-family: "Roboto Mono", monospace;
   font-size: 1.2rem;
 }
-body main #currency-select {
+body main .box #currency-select {
   font-size: 1.2rem;
 }
-body main #convert-btn {
+body main .box #convert-btn {
   padding: 10px;
   border-radius: 5px;
   background-color: #729d2d;
@@ -68,15 +68,15 @@ body main #convert-btn {
   border: none;
   font-size: 1.2rem;
 }
-body main #convert-btn:hover {
+body main .box #convert-btn:hover {
   background-color: #5c861a;
   cursor: pointer;
 }
-body main #result {
+body main .box #result {
   font-size: 2.3rem;
   font-family: "Roboto Mono", monospace;
 }
-body #error {
+body main #error {
   color: #ff403d;
   text-align: center;
   margin-top: 1rem;

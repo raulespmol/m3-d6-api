@@ -6,6 +6,7 @@ const spanResult = document.getElementById('result')
 const spanError = document.getElementById('error')
 
 const API = 'https://mindicador.cl/api'
+let myChart = null
 
 renderOptions(API)
 
@@ -26,7 +27,7 @@ async function getCurrencies(URL){ //Obtener datos y llamar monedas
     const { uf, dolar, euro, utm } = data
     return[ uf, dolar, euro, utm ];
   } catch (error) {
-    errorMessage(error)
+    renderError(error)
   }
 }
 
@@ -40,9 +41,8 @@ async function renderOptions(URL){ //Renderizar opciones de las monedas llamadas
   
       select.appendChild(option)
     })
-    console.log(currencies); //BORRAR
   } catch (error) {
-    errorMessage(error)
+    renderError(error)
   }
 }
 
@@ -53,19 +53,19 @@ async function fetchSelected(){ //Constular API de la moneda seleccionada
   try {
     const res = await fetch(selectedURL)
     const data = await res.json()
-    console.log(data);
     return data
   } catch (error) {
-    errorMessage(error)
+    renderError(error)
   }
 }
 
 async function convertCurrency(){ //Obtener CLP desde input y valor de moneda seleccionada para conversion
   if(select.value != '0'){
     const valueCLP = parseInt(inputCLP.value)
+
     const selectedCurrency = await fetchSelected()
     const currencyValue = selectedCurrency.serie[0].valor
-    
+
     if(valueCLP > 0){
       const conversion = (valueCLP / currencyValue).toFixed(2)
       spanResult.innerText = `${selectedCurrency.codigo === 'euro' ? '€' : '$'}${conversion}`
@@ -75,8 +75,48 @@ async function convertCurrency(){ //Obtener CLP desde input y valor de moneda se
   }
 }
 
-function errorMessage(error){
+async function chartConfig() {
+  // Creamos las variables necesarias para el objeto de configuración
+  const selectedCurrency = await fetchSelected()
+  
+  const dates = selectedCurrency.serie.map(c => c.fecha)
+  const formatDate = dates.map(d => d.slice(0, 10))
+  
+  const chartType = "line";
+  const title = "Valor histórico";
+  const lineColor = "red";
+  const values = selectedCurrency.serie.map(c => parseInt(c.valor))
+
+  //Creamos el objeto de configuración usando las variables anteriores
+  const config = {
+    type: chartType,
+    data: {
+      labels: formatDate,
+      datasets: [
+      {
+        label: title,
+        backgroundColor: lineColor,
+        data: values
+      }
+      ]
+    }
+  };
+  return config;
+}
+
+async function renderChart() {
+  const config = await chartConfig();
+  console.log(config);
+  const chartDOM = document.getElementById("myChart");
+  if(myChart){
+    myChart.destroy()
+  }
+  myChart = new Chart(chartDOM, config);
+}
+
+function renderError(error){
   spanError.innerText =
     `Lo sentimos! Ha ocurrido un error \n
     (${error.message})`
 }
+

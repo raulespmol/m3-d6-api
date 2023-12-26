@@ -3,22 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="./assets/styles/style.css">
   <title>Conversor de Moneda</title>
 </head>
 <body>
-  <h1>Conversor de Moneda</h1>
   <main>
-    <h2>Pesos Chilenos</h2>
-    <input type="number" id="clp-input" min="0" placeholder="CLP">
-    <p>Convertir a:</p>
-    <select id="currency-select">
-      <option disabled selected value="0">Selecciona una moneda</option>
-    </select>
-    <button id="convert-btn">Convertir</button>
-    <span id="result"></span>
+    <h1>Conversor de Moneda</h1>
+    <section class="box">
+      <h2>Pesos Chilenos</h2>
+      <input type="number" id="clp-input" min="0" placeholder="CLP">
+      <p>Convertir a:</p>
+      <select id="currency-select">
+        <option disabled selected value="0">Selecciona una moneda</option>
+      </select>
+      <button id="convert-btn">Convertir</button>
+      <span id="result"></span>
+    </section>
+    <span id="error"></span>
   </main>
-  <span id="error"></span>
+  <div class="grafica">
+    <canvas id="myChart"></canvas>
+  </div>
 
   <script src="./assets/script/app.js"></script>
 </body>
