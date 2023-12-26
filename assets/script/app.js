@@ -18,6 +18,11 @@ inputCLP.addEventListener('keydown', e => {
     convertCurrency()
   }
 })
+inputCLP.addEventListener('input', function(){
+  if (this.value.length > 9){ 
+     this.value = this.value.slice(0,9);
+  } 
+})
 
 //Funciones
 async function getCurrencies(URL){ //Obtener datos y llamar monedas
